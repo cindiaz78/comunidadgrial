@@ -230,82 +230,329 @@
 
   <!-- MODAL: DARSE DE ALTA (FORMULARIO) -->
   <div class="modal-overlay" id="signup-modal">
-    <div class="modal-card modal-card-large">
+    <div class="modal-card modal-card-large modal-card-light">
       <button class="modal-close-btn" id="signup-modal-close">
         <i data-lucide="x"></i>
       </button>
-      <h3>Formulario de Alta - Comunidad del Grial</h3>
-      <p class="signup-intro">Completá tu ficha para contarnos quién sos, qué te apasiona y qué saberes tenés para compartir con la Comunidad.</p>
+      <h3 id="signup-modal-title">Formulario de Alta - Comunidad del Grial</h3>
+      <p class="signup-intro" id="signup-modal-subtitle">Completá tu ficha para contarnos quién sos, qué te apasiona y qué saberes tenés para compartir con la Comunidad.</p>
       
+      <!-- Contenedor del Formulario (con pasos) -->
+      <!-- Contenedor del Formulario (con pasos) -->
       <form id="signup-form" class="signup-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="signup-name">Nombre y Apellido *</label>
-            <input type="text" id="signup-name" required placeholder="Ej. Martín Paz">
+        <!-- Indicador de Pasos -->
+        <div class="signup-steps-container">
+          <div class="signup-step-header active" data-step="1">
+            <span class="step-num">1</span>
+            <span class="step-label">Personales</span>
           </div>
-          <div class="form-group">
-            <label for="signup-type">Tipo de Miembro *</label>
-            <select id="signup-type" required>
-              <option value="Terapeuta">Terapeuta</option>
-              <option value="Profesional">Profesional</option>
-              <option value="Mixto">Mixto (Ambos)</option>
-            </select>
+          <div class="signup-step-header" data-step="2">
+            <span class="step-num">2</span>
+            <span class="step-label">Propósito</span>
           </div>
-          <div class="form-group">
-            <label for="signup-profession">Profesión / Título Principal *</label>
-            <input type="text" id="signup-profession" required placeholder="Ej. Guía Espiritual">
+          <div class="signup-step-header" data-step="3">
+            <span class="step-num">3</span>
+            <span class="step-label">Profesión</span>
           </div>
-          <div class="form-group">
-            <label for="signup-phone">Teléfono de Contacto (WhatsApp) *</label>
-            <input type="tel" id="signup-phone" required placeholder="Ej. 5491134567890">
+          <div class="signup-step-header" data-step="4">
+            <span class="step-num">4</span>
+            <span class="step-label">Terapias</span>
           </div>
-          <div class="form-group">
-            <label for="signup-country">País *</label>
-            <input type="text" id="signup-country" required placeholder="Ej. Perú">
+          <div class="signup-step-header" data-step="5">
+            <span class="step-num">5</span>
+            <span class="step-label">Dones</span>
           </div>
-          <div class="form-group">
-            <label for="signup-city">Ciudad *</label>
-            <input type="text" id="signup-city" required placeholder="Ej. Cusco">
-          </div>
-          <div class="form-group">
-            <label for="signup-lat">Latitud (para el mapa) *</label>
-            <input type="number" step="any" id="signup-lat" required placeholder="Ej. -13.5226">
-          </div>
-          <div class="form-group">
-            <label for="signup-lng">Longitud (para el mapa) *</label>
-            <input type="number" step="any" id="signup-lng" required placeholder="Ej. -71.9673">
-          </div>
-        </div>
-        
-        <div class="form-group full-width">
-          <label for="signup-therapies">Terapias y Especialidades (separadas por comas) *</label>
-          <input type="text" id="signup-therapies" required placeholder="Ej. Sanación Energética, Reiki, Música Medicina">
-        </div>
-        
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="signup-aparatologia">Aparatología (separada por comas)</label>
-            <input type="text" id="signup-aparatologia" placeholder="Ej. Generador de Orgón, Camilla Ceragem">
-          </div>
-          <div class="form-group">
-            <label for="signup-elementos">Elementos Sagrados (separados por comas)</label>
-            <input type="text" id="signup-elementos" placeholder="Ej. Cuencos de Cuarzo, Gemas, Sahumerios">
+          <div class="signup-step-header" data-step="6">
+            <span class="step-num">6</span>
+            <span class="step-label">Presentación</span>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="signup-photo">URL de Foto de Perfil (Opcional)</label>
-          <input type="url" id="signup-photo" placeholder="https://ejemplo.com/tu-foto.jpg">
+        <!-- PASO 1: DATOS PERSONALES -->
+        <div class="signup-step active" data-step="1">
+          <div class="form-section">
+            <div class="form-section-title">
+              <i data-lucide="user"></i> Datos Personales
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="signup-name">Nombre *</label>
+                <input type="text" id="signup-name" required placeholder="Ej. Martín">
+              </div>
+              <div class="form-group">
+                <label for="signup-lastname">Apellido *</label>
+                <input type="text" id="signup-lastname" required placeholder="Ej. Paz">
+              </div>
+              <div class="form-group">
+                <label for="signup-birthdate">Fecha de Nacimiento *</label>
+                <input type="date" id="signup-birthdate" required>
+              </div>
+              <div class="form-group">
+                <label for="signup-birthcountry">País de Nacimiento *</label>
+                <input type="text" id="signup-birthcountry" required placeholder="Ej. Perú">
+              </div>
+              <div class="form-group">
+                <label for="signup-city">Ciudad de Residencia *</label>
+                <input type="text" id="signup-city" required placeholder="Ej. Cusco">
+              </div>
+              <div class="form-group">
+                <label for="signup-country">País de Residencia *</label>
+                <input type="text" id="signup-country" required placeholder="Ej. Perú">
+              </div>
+              <div class="form-group">
+                <label for="signup-phone">WhatsApp *</label>
+                <input type="tel" id="signup-phone" required placeholder="Ej. 5491134567890">
+              </div>
+              <div class="form-group">
+                <label for="signup-email">Email *</label>
+                <input type="email" id="signup-email" required placeholder="Ej. martin@grial.com">
+              </div>
+              <div class="form-group">
+                <label for="signup-instagram">Instagram (Usuario sin @) *</label>
+                <input type="text" id="signup-instagram" required placeholder="Ej. martin.paz.grial">
+              </div>
+              <div class="form-group">
+                <label for="signup-photo">URL de Foto de Perfil (Opcional)</label>
+                <input type="url" id="signup-photo" placeholder="https://ejemplo.com/tu-foto.jpg">
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="signup-cancel-btn">Cancelar</button>
+            <button type="button" class="btn btn-gold btn-next-step" data-next="2">Siguiente</button>
+          </div>
         </div>
 
-        <div class="form-actions">
-          <button type="button" class="btn btn-secondary" id="signup-cancel-btn">Cancelar</button>
-          <button type="submit" class="btn btn-gold">Enviar Solicitud</button>
+        <!-- PASO 2: PROPÓSITO E INTRODUCCIÓN -->
+        <div class="signup-step" data-step="2">
+          <!-- Párrafo introductorio -->
+          <div class="signup-intro-block">
+            <h4>🌟 Tu Lugar en la Red: Compartí tu Profesión, Terapias y Dones</h4>
+            <p>La Comunidad se construye desde el propósito de cada alma que la integra. Al registrar tus profesiones, servicios, terapias holísticas, dones naturales o percepciones sutiles (claris), no solo estás completando un perfil, sino que:</p>
+            <ul>
+              <li>hacés visible tu labor para quienes hoy están buscando exactamente lo que vos ofreces,</li>
+              <li>permitís que otros miembros te encuentren para activar proyectos, entrelazar saberes y armar equipos de colaboración consciente,</li>
+              <li>transformamos la afinidad espiritual en una red de contención práctica, real y global.</li>
+            </ul>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="1">Anterior</button>
+            <button type="button" class="btn btn-gold btn-next-step" data-next="3">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- PASO 3: DATOS PROFESIÓN / OFICIOS -->
+        <div class="signup-step" data-step="3">
+          <div class="form-section">
+            <div class="form-section-title">
+              <i data-lucide="briefcase"></i> Datos Profesión / Oficios
+            </div>
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <label for="signup-profession-category">Seleccionar Categoría de Profesión</label>
+              <select id="signup-profession-category">
+                <option value="">-- Seleccionar Categoría --</option>
+                <option value="Medicina, Psicología, Nutrición, Kinesiología, Enfermería, Odontología">Medicina, Psicología, Nutrición, Kinesiología, Enfermería, Odontología</option>
+                <option value="Educación, Docencia y Pedagogía">Educación, Docencia y Pedagogía</option>
+                <option value="Ciencias Sociales, Humanas y Jurídicas">Ciencias Sociales, Humanas y Jurídicas</option>
+                <option value="Tecnología, Sistemas y Datos">Tecnología, Sistemas y Datos</option>
+                <option value="Diseño, Arte y Expresión Creativa">Diseño, Arte y Expresión Creativa</option>
+                <option value="Comunicación, Marketing y Medios">Comunicación, Marketing y Medios</option>
+                <option value="Administración, Finanzas y Legal">Administración, Finanzas y Legal</option>
+                <option value="Ciencias Exactas, Naturales e Ingeniería">Ciencias Exactas, Naturales e Ingeniería</option>
+                <option value="Oficios Técnicos, Manuales y Artesanales">Oficios Técnicos, Manuales y Artesanales</option>
+                <option value="Oficios Verdes, Agro y Tierra">Oficios Verdes, Agro y Tierra</option>
+                <option value="Otra">Otra (Carga manual)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="signup-profession-select" id="lbl-profession-select" style="display:none;">Seleccionar Profesión</label>
+              <div class="input-add-combo">
+                <select id="signup-profession-select" style="display:none;">
+                  <option value="">-- Seleccionar Profesión --</option>
+                </select>
+                <input type="text" id="signup-profession-input" placeholder="Escribe tu profesión..." style="display:none;">
+                <button type="button" class="btn btn-gold-small" id="btn-add-profession" style="display:none;">Añadir</button>
+              </div>
+            </div>
+            
+            <div class="tags-label-group">
+              <label>Profesiones Seleccionadas</label>
+              <div class="tags-dynamic-container" id="signup-professions-tags">
+                <!-- Renderizado dinámico de profesiones -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="2">Anterior</button>
+            <button type="button" class="btn btn-gold btn-next-step" data-next="4">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- PASO 4: TERAPIAS HOLÍSTICAS Y MEDICINAS COMPLEMENTARIAS -->
+        <div class="signup-step" data-step="4">
+          <!-- Terapias Holísticas y Medicinas Complementarias -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <i data-lucide="sparkles"></i> Terapias Holísticas y Medicinas Complementarias
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <label for="signup-therapy-select">Seleccionar o Escribir Terapia</label>
+              <div class="input-add-combo">
+                <select id="signup-therapy-select">
+                  <option value="">-- Seleccionar Terapia --</option>
+                  <option value="Reiki">Reiki</option>
+                  <option value="Astrología">Astrología</option>
+                  <option value="Yoga">Yoga</option>
+                  <option value="Biodecodificación">Biodecodificación</option>
+                  <option value="Terapias Florales">Terapias Florales</option>
+                  <option value="Acupuntura">Acupuntura</option>
+                  <option value="Registros Akashico">Registros Akashico</option>
+                  <option value="Constelaciones Familiares">Constelaciones Familiares</option>
+                  <option value="Radiestesia">Radiestesia</option>
+                  <option value="Pendulo">Pendulo</option>
+                  <option value="Armonización de Chackras">Armonización de Chackras</option>
+                  <option value="Cuencos Cristal de Cuarzo">Cuencos Cristal de Cuarzo</option>
+                  <option value="Energía Escalar">Energía Escalar</option>
+                </select>
+                <input type="text" id="signup-therapy-input" placeholder="O escribir otra terapia...">
+                <button type="button" class="btn btn-gold-small" id="btn-add-therapy">Añadir</button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="signup-element-select">Seleccionar o Escribir Elemento</label>
+              <div class="input-add-combo">
+                <select id="signup-element-select">
+                  <option value="">-- Seleccionar Elemento --</option>
+                  <option value="Aceites Esenciales">Aceites Esenciales</option>
+                  <option value="Cuencos de Cuarzo">Cuencos de Cuarzo</option>
+                  <option value="Cuencos Tibetanos">Cuencos Tibetanos</option>
+                  <option value="Gemas">Gemas</option>
+                  <option value="Péndulo">Péndulo</option>
+                  <option value="Sahumerios">Sahumerios</option>
+                  <option value="Tambor Chamánico">Tambor Chamánico</option>
+                  <option value="Generador de Orgón">Generador de Orgón</option>
+                  <option value="Flores de Bach">Flores de Bach</option>
+                  <option value="Sahumadores">Sahumadores</option>
+                </select>
+                <input type="text" id="signup-element-input" placeholder="O escribir otro elemento...">
+                <button type="button" class="btn btn-gold-small" id="btn-add-element">Añadir</button>
+              </div>
+            </div>
+
+            <div class="tags-label-group">
+              <label>Terapias y Elementos Seleccionados</label>
+              <div class="tags-dynamic-container" id="signup-therapies-elements-tags">
+                <!-- Renderizado dinámico de terapias y elementos -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="3">Anterior</button>
+            <button type="button" class="btn btn-gold btn-next-step" data-next="5">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- PASO 5: DONES Y CAPACIDADES SUTILES -->
+        <div class="signup-step" data-step="5">
+          <!-- Pequeño texto antes de la próxima sección -->
+          <div class="signup-quote-block">
+            <p>“Cada ser porta una medicina única. Compartí aquellas capacidades naturales, percepciones o herramientas sutiles que ponés al servicio del despertar y la co-creación en comunidad.”</p>
+          </div>
+
+          <!-- Dones y Capacidades Sutiles -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <i data-lucide="award"></i> Dones y Capacidades Sutiles
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <label for="signup-dones-select">Seleccionar Dones / Capacidades</label>
+              <div class="input-add-combo">
+                <select id="signup-dones-select">
+                  <option value="">-- Seleccionar Don / Capacidad --</option>
+                  <option value="Oratoria y Comunicación (Facilidad para transmitir ideas, dar charlas)">Oratoria y Comunicación (Facilidad para transmitir ideas, dar charlas)</option>
+                  <option value="Escucha Empática / Contención (Espacio seguro para el desahogo y sostén emocional)">Escucha Empática / Contención (Espacio seguro para el desahogo y sostén emocional)</option>
+                  <option value="Facilitación de Grupos (Liderazgo consciente, moderación, guiar meditaciones o talleres)">Facilitación de Grupos (Liderazgo consciente, moderación, guiar meditaciones o talleres)</option>
+                  <option value="Arte y Creatividad Canalizada (Música, pintura, escritura inspirada)">Arte y Creatividad Canalizada (Música, pintura, escritura inspirada)</option>
+                  <option value="Organización y Logística (Saber materializar, armar eventos, estructurar proyectos)">Organización y Logística (Saber materializar, armar eventos, estructurar proyectos)</option>
+                  <option value="Sanación por Imposición de Manos / Energía (Reiki, pases energéticos)">Sanación por Imposición de Manos / Energía (Reiki, pases energéticos)</option>
+                  <option value="Enseñanza y Pedagogía (Transmitir conocimiento de forma clara)">Enseñanza y Pedagogía (Transmitir conocimiento de forma clara)</option>
+                  <option value="Guardiana/o de la Tierra (Trabajo con huertas, plantas medicinales, cristales)">Guardiana/o de la Tierra (Trabajo con huertas, plantas medicinales, cristales)</option>
+                  <option value="Otro">Otro (Escribir...)</option>
+                </select>
+                <input type="text" id="signup-dones-input" placeholder="Escribe otro don..." style="display:none;">
+                <button type="button" class="btn btn-gold-small" id="btn-add-dones" style="display:none;">Añadir</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="signup-claris-select">Seleccionar Percepciones Sutiles (Claris)</label>
+              <div class="input-add-combo">
+                <select id="signup-claris-select">
+                  <option value="">-- Seleccionar Percepción (Clari) --</option>
+                  <option value="Clarividencia (Visión sutil: ver el aura, imágenes mentales, destellos de luz, el plano astral)">Clarividencia (Visión sutil: ver el aura, imágenes mentales, destellos de luz, el plano astral)</option>
+                  <option value="Clariaudiencia (Audición sutil: recibir mensajes claros en forma de palabras, sonidos o guía interna)">Clariaudiencia (Audición sutil: recibir mensajes claros en forma de palabras, sonidos o guía interna)</option>
+                  <option value="Clarisensibilidad / Empatía Profunda (Sentir físicamente en el propio cuerpo la energía, emociones o dolores del entorno/otras personas)">Clarisensibilidad / Empatía Profunda (Sentir físicamente en el propio cuerpo la energía, emociones o dolores del entorno/otras personas)</option>
+                  <option value="Claricoñecimiento / Intuición Directa (Saber algo con certeza absoluta sin mediación de la mente ni explicación lógica)">Claricoñecimiento / Intuición Directa (Saber algo con certeza absoluta sin mediación de la mente ni explicación lógica)</option>
+                  <option value="Clarigustación / Clariolfato (Percibir aromas o sabores de planos sutiles, como perfume de flores o incienso sin causa física)">Clarigustación / Clariolfato (Percibir aromas o sabores de planos sutiles, como perfume de flores o incienso sin causa física)</option>
+                  <option value="Percepción Onírica (Sueños lúcidos, sueños premonitorios, recibir guía a través del plano de los sueños)">Percepción Onírica (Sueños lúcidos, sueños premonitorios, recibir guía a través del plano de los sueños)</option>
+                  <option value="Canalización (Capacidad de ser puente para transmitir mensajes de planos elevados o guías espirituales)">Canalización (Capacidad de ser puente para transmitir mensajes de planos elevados o guías espirituales)</option>
+                  <option value="Otro">Otro (Escribir...)</option>
+                </select>
+                <input type="text" id="signup-claris-input" placeholder="Escribe otra percepción..." style="display:none;">
+                <button type="button" class="btn btn-gold-small" id="btn-add-claris" style="display:none;">Añadir</button>
+              </div>
+            </div>
+            
+            <div class="tags-label-group">
+              <label>Dones y Percepciones Seleccionados</label>
+              <div class="tags-dynamic-container" id="signup-dones-claris-tags">
+                <!-- Renderizado dinámico de dones y claris -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="4">Anterior</button>
+            <button type="button" class="btn btn-gold btn-next-step" data-next="6">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- PASO 6: ACERCA DE MÍ -->
+        <div class="signup-step" data-step="6">
+          <div class="form-section">
+            <div class="form-section-title">
+              <i data-lucide="info"></i> Acerca de Mí
+            </div>
+            <div class="form-group">
+              <label for="signup-about">Presentación o Texto Libre *</label>
+              <textarea id="signup-about" required placeholder="Cuéntanos un poco sobre vos, tu recorrido, tus intenciones y lo que deseas compartir en la Comunidad del Grial..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="5">Anterior</button>
+            <button type="submit" class="btn btn-gold">Enviar Solicitud</button>
+          </div>
         </div>
       </form>
-    </div>
-  </div>
 
+      <!-- Vista de Éxito al Enviar Solicitud -->
+      <div class="signup-step-success" id="signup-success-view" style="display:none; text-align: center; padding: 2.5rem 1.5rem;">
+        <div class="success-icon-wrapper" style="margin-bottom: 1.5rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#c5931e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto; filter: drop-shadow(0 0 10px rgba(197, 147, 30, 0.2));"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3 style="color: #1a202c; font-size: 1.6rem; font-weight: 700; margin-bottom: 1.25rem; font-family: 'Outfit', sans-serif;">¡Solicitud Recibida con Éxito!</h3>
+        <p style="color: #4a5568; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+          Gracias por querer sumarte a la Comunidad del Grial. Vamos a revisar tu solicitud y te contactaremos pronto por WhatsApp o email.
+        </p>
+        <button type="button" class="btn btn-gold" id="btn-signup-success-close" style="width: 100%; max-width: 200px; margin: 0 auto; display: block;">Cerrar</button>
+      </div>
   <!-- MODAL: INSCRIPCIÓN A ACTIVIDAD -->
   <div class="modal-overlay" id="register-modal">
     <div class="modal-card">

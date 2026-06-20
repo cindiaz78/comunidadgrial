@@ -1050,8 +1050,10 @@ button, input, select, textarea {
   backdrop-filter: blur(8px);
   z-index: 2000;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  overflow-y: auto;
+  padding: 2.5rem 1rem;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -1458,6 +1460,387 @@ button, input, select, textarea {
 
 
 /* ==========================================================================
+   ESTILOS FORMULARIO DE ALTA TEMA CLARO (LIGHT THEME)
+   ========================================================================== */
+
+.modal-card-light {
+  background-color: #fbf9f4 !important; /* fondo crema premium */
+  color: #2d3748 !important;
+  border: 1.5px solid var(--primary-gold-border) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
+}
+
+.modal-card-light h3 {
+  color: #1a202c !important;
+  font-size: 1.65rem;
+  font-weight: 700;
+  border-bottom: 2px solid rgba(197, 147, 30, 0.2);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-card-light .signup-intro {
+  color: #4a5568 !important;
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-card-light .form-section {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.modal-card-light .form-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-gold-hover);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 0.5rem;
+}
+
+.modal-card-light .form-section-title i {
+  width: 18px;
+  height: 18px;
+  color: var(--primary-gold);
+}
+
+.modal-card-light .form-group label {
+  color: #4a5568 !important;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.modal-card-light .form-group input,
+.modal-card-light .form-group select,
+.modal-card-light .form-group textarea {
+  background-color: #fdfdfd !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #1a202c !important;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.modal-card-light .form-group input::placeholder,
+.modal-card-light .form-group textarea::placeholder {
+  color: #a0aec0 !important;
+}
+
+.modal-card-light .form-group input:focus,
+.modal-card-light .form-group select:focus,
+.modal-card-light .form-group textarea:focus {
+  outline: none;
+  background-color: #ffffff !important;
+  border-color: var(--primary-gold) !important;
+  box-shadow: 0 0 0 3px rgba(197, 147, 30, 0.15) !important;
+}
+
+/* Combo input layout */
+.input-add-combo {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: center;
+}
+
+.input-add-combo select {
+  flex: 1;
+  min-width: 120px;
+  height: 38px !important;
+  box-sizing: border-box !important;
+}
+
+.input-add-combo input {
+  flex: 1.5;
+  min-width: 150px;
+  height: 38px !important;
+  box-sizing: border-box !important;
+}
+
+.btn-gold-small {
+  background-color: var(--primary-gold) !important;
+  color: #000 !important;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px !important;
+  box-sizing: border-box !important;
+}
+
+.btn-gold-small:hover {
+  background-color: var(--primary-gold-hover) !important;
+  transform: translateY(-1px);
+}
+
+/* Dynamic Tags */
+.tags-label-group {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tags-label-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #718096 !important;
+  text-transform: uppercase;
+}
+
+.tags-dynamic-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 42px;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background-color: #f7f5ef;
+  border: 1px dashed rgba(197, 147, 30, 0.25);
+  align-items: center;
+}
+
+.tag-dynamic {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: #fdfaf2;
+  color: #a87b16;
+  border: 1px solid rgba(197, 147, 30, 0.25);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  animation: tagPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tag-dynamic-type-therapy {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.tag-dynamic-type-element {
+  background-color: #f0f9ff;
+  color: #0284c7;
+  border: 1px solid rgba(2, 132, 199, 0.25);
+}
+
+.tag-dynamic-type-profession {
+  background-color: #fffbeb;
+  color: #d97706;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+}
+
+.tag-dynamic-remove-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: bold;
+}
+
+.tag-dynamic-remove-btn:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #000;
+}
+
+@keyframes tagPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tag-dynamic-type-don {
+  background-color: #faf5ff !important;
+  color: #7c3aed !important;
+  border: 1px solid rgba(124, 58, 237, 0.25) !important;
+}
+
+.tag-dynamic-type-clari {
+  background-color: #fff1f2 !important;
+  color: #db2777 !important;
+  border: 1px solid rgba(219, 39, 119, 0.25) !important;
+}
+
+/* Steps Indicator */
+.signup-steps-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: #f7f5ef;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(197, 147, 30, 0.15);
+}
+
+.signup-step-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+
+.signup-step-header.active {
+  opacity: 1;
+}
+
+.signup-step-header.completed {
+  opacity: 0.8;
+}
+
+.signup-step-header .step-num {
+  width: 24px;
+  height: 24px;
+  background-color: #a0aec0;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+}
+
+.signup-step-header.active .step-num {
+  background-color: var(--primary-gold);
+  box-shadow: 0 0 10px rgba(197, 147, 30, 0.4);
+}
+
+.signup-step-header.completed .step-num {
+  background-color: #16a34a;
+}
+
+.signup-step-header .step-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+/* Step content visibility */
+.signup-step {
+  display: none;
+}
+
+.signup-step.active {
+  display: block;
+}
+
+/* Step intro and quote blocks */
+.signup-intro-block {
+  background-color: #fdfaf2;
+  border-left: 4px solid var(--primary-gold);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(197, 147, 30, 0.05);
+}
+
+.signup-intro-block h4 {
+  color: var(--primary-gold-hover) !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-family: 'Outfit', sans-serif;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.signup-intro-block p {
+  font-size: 0.85rem;
+  color: #4a5568 !important;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.signup-intro-block ul {
+  font-size: 0.85rem;
+  color: #4a5568 !important;
+  line-height: 1.5;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.signup-intro-block li {
+  list-style-type: disc;
+}
+
+.signup-quote-block {
+  text-align: center;
+  font-style: italic;
+  color: var(--primary-gold-hover);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-top: 1px dashed rgba(197, 147, 30, 0.2);
+  border-bottom: 1px dashed rgba(197, 147, 30, 0.2);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.signup-quote-block p {
+  color: var(--primary-gold-hover) !important;
+}
+
+/* Success view */
+.signup-step-success {
+  animation: tagPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@media (max-width: 768px) {
+  .signup-steps-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .signup-step-header .step-label {
+    display: none; /* Hide labels on mobile to save space */
+  }
+}
+
+
+/* ==========================================================================
    RESPONSIVIDAD Y MEDIA QUERIES
    ========================================================================== */
 
@@ -1559,5 +1942,18 @@ button, input, select, textarea {
   
   .modal-info-grid {
     grid-template-columns: 1fr;
+  }
+
+  .input-add-combo {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .input-add-combo select,
+  .input-add-combo input,
+  .input-add-combo .btn-gold-small {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 38px !important;
   }
 }

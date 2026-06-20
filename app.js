@@ -17,6 +17,14 @@ let markersGroup;
 const markersMap = new Map(); // Para asociar ID de miembro con su marcador Leaflet
 let activePopup = null;
 
+// Estado temporal para el formulario de alta (Darse de Alta)
+let signupProfessions = [];
+let signupTherapies = [];
+let signupElements = [];
+let signupDones = [];
+let signupClaris = [];
+let currentSignupStep = 1;
+
 // Inicialización al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
   initMap();
@@ -396,6 +404,250 @@ function renderActivities() {
     });
   });
 }
+// Configuración de profesiones por categoría
+const professionsByCategory = {
+  "Medicina, Psicología, Nutrición, Kinesiología, Enfermería, Odontología": [
+    "Medicina", "Psicología", "Nutrición", "Kinesiología", "Enfermería", "Odontología", "Cosmética", "Estética"
+  ],
+  "Educación, Docencia y Pedagogía": [
+    "Profesorados", "Maestros", "Psicopedagogía", "Capacitadores", "Coaching Educativo"
+  ],
+  "Ciencias Sociales, Humanas y Jurídicas": [
+    "Abogacía", "Trabajo Social", "Sociología", "Antropología", "Filosofía", "Historia"
+  ],
+  "Tecnología, Sistemas y Datos": [
+    "Programación", "Ingeniería de Software", "Analistas de Datos", "Ciberseguridad"
+  ],
+  "Diseño, Arte y Expresión Creativa": [
+    "Diseño Gráfico/Web", "Artes Visuales", "Música", "Teatro", "Fotografía", "Danza"
+  ],
+  "Comunicación, Marketing y Medios": [
+    "Periodismo", "Relaciones Públicas", "Community Management", "Copywriting", "Locución"
+  ],
+  "Administración, Finanzas y Legal": [
+    "Contador Público", "Administración", "Recursos Humanos", "Logística", "Consultoría"
+  ],
+  "Ciencias Exactas, Naturales e Ingeniería": [
+    "Arquitectura", "Ingeniería Civil/Industrial", "Biología", "Ciencias Ambientales", "Química"
+  ],
+  "Oficios Técnicos, Manuales y Artesanales": [
+    "Carpintería", "Electricidad", "Gastronomía", "Costura/Diseño textil"
+  ],
+  "Oficios Verdes, Agro y Tierra": [
+    "Permacultura", "Agronomía", "Paisajismo", "Jardinería", "Cuidado de Animales", "Veterinaria"
+  ]
+};
+
+// Helper para renderizar las etiquetas de profesiones en el formulario de alta
+function renderSignupProfessions() {
+  const container = document.getElementById('signup-professions-tags');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  if (signupProfessions.length === 0) {
+    container.innerHTML = `<span style="color: #718096; font-size: 0.8rem; font-style: italic;">Ninguna profesión añadida aún.</span>`;
+    return;
+  }
+  
+  signupProfessions.forEach((prof, index) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag-dynamic tag-dynamic-type-profession';
+    tag.innerHTML = `
+      <span>${prof}</span>
+      <button type="button" class="tag-dynamic-remove-btn" data-index="${index}" title="Eliminar">&times;</button>
+    `;
+    
+    tag.querySelector('.tag-dynamic-remove-btn').addEventListener('click', (e) => {
+      const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+      signupProfessions.splice(idx, 1);
+      renderSignupProfessions();
+    });
+    
+    container.appendChild(tag);
+  });
+}
+
+// Helper para renderizar las etiquetas de terapias y elementos en el formulario de alta
+function renderSignupTherapiesElements() {
+  const container = document.getElementById('signup-therapies-elements-tags');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  if (signupTherapies.length === 0 && signupElements.length === 0) {
+    container.innerHTML = `<span style="color: #718096; font-size: 0.8rem; font-style: italic;">Ninguna terapia o elemento añadido aún.</span>`;
+    return;
+  }
+  
+  // Renderizar Terapias (Verde)
+  signupTherapies.forEach((therapy, index) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag-dynamic tag-dynamic-type-therapy';
+    tag.innerHTML = `
+      <span>🌀 ${therapy}</span>
+      <button type="button" class="tag-dynamic-remove-btn" data-index="${index}" title="Eliminar">&times;</button>
+    `;
+    
+    tag.querySelector('.tag-dynamic-remove-btn').addEventListener('click', (e) => {
+      const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+      signupTherapies.splice(idx, 1);
+      renderSignupTherapiesElements();
+    });
+    
+    container.appendChild(tag);
+  });
+  
+  // Renderizar Elementos (Celeste)
+  signupElements.forEach((elem, index) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag-dynamic tag-dynamic-type-element';
+    tag.innerHTML = `
+      <span>💎 ${elem}</span>
+      <button type="button" class="tag-dynamic-remove-btn" data-index="${index}" title="Eliminar">&times;</button>
+    `;
+    
+    tag.querySelector('.tag-dynamic-remove-btn').addEventListener('click', (e) => {
+      const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+      signupElements.splice(idx, 1);
+      renderSignupTherapiesElements();
+    });
+    
+    container.appendChild(tag);
+  });
+}
+
+// Helper para renderizar las etiquetas de dones y claris en el formulario de alta
+function renderSignupDonesClaris() {
+  const container = document.getElementById('signup-dones-claris-tags');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  if (signupDones.length === 0 && signupClaris.length === 0) {
+    container.innerHTML = `<span style="color: #718096; font-size: 0.8rem; font-style: italic;">Ningún don o percepción añadida aún.</span>`;
+    return;
+  }
+  
+  // Renderizar Dones (Púrpura)
+  signupDones.forEach((don, index) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag-dynamic tag-dynamic-type-don';
+    tag.innerHTML = `
+      <span>🌟 ${don}</span>
+      <button type="button" class="tag-dynamic-remove-btn" data-index="${index}" title="Eliminar">&times;</button>
+    `;
+    
+    tag.querySelector('.tag-dynamic-remove-btn').addEventListener('click', (e) => {
+      const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+      signupDones.splice(idx, 1);
+      renderSignupDonesClaris();
+    });
+    
+    container.appendChild(tag);
+  });
+
+  // Renderizar Claris (Rosa)
+  signupClaris.forEach((clari, index) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag-dynamic tag-dynamic-type-clari';
+    tag.innerHTML = `
+      <span>👁️ ${clari}</span>
+      <button type="button" class="tag-dynamic-remove-btn" data-index="${index}" title="Eliminar">&times;</button>
+    `;
+    
+    tag.querySelector('.tag-dynamic-remove-btn').addEventListener('click', (e) => {
+      const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+      signupClaris.splice(idx, 1);
+      renderSignupDonesClaris();
+    });
+    
+    container.appendChild(tag);
+  });
+}
+
+function addProfession(val) {
+  const value = val.trim();
+  if (value && !signupProfessions.includes(value)) {
+    signupProfessions.push(value);
+    renderSignupProfessions();
+  }
+}
+
+function addTherapy(val) {
+  const value = val.trim();
+  if (value && !signupTherapies.includes(value)) {
+    signupTherapies.push(value);
+    renderSignupTherapiesElements();
+  }
+}
+
+function addElement(val) {
+  const value = val.trim();
+  if (value && !signupElements.includes(value)) {
+    signupElements.push(value);
+    renderSignupTherapiesElements();
+  }
+}
+
+function addDones(val) {
+  const value = val.trim();
+  if (value && !signupDones.includes(value)) {
+    signupDones.push(value);
+    renderSignupDonesClaris();
+  }
+}
+
+function addClaris(val) {
+  const value = val.trim();
+  if (value && !signupClaris.includes(value)) {
+    signupClaris.push(value);
+    renderSignupDonesClaris();
+  }
+}
+
+// Navegación de Viñetas (Wizard)
+function showSignupStep(stepNum) {
+  currentSignupStep = stepNum;
+  
+  // Ocultar todas las viñetas y mostrar la activa
+  document.querySelectorAll('.signup-step').forEach(stepEl => {
+    stepEl.classList.remove('active');
+  });
+  const activeStepEl = document.querySelector(`.signup-step[data-step="${stepNum}"]`);
+  if (activeStepEl) {
+    activeStepEl.classList.add('active');
+  }
+
+  // Actualizar indicadores de pasos
+  document.querySelectorAll('.signup-step-header').forEach(headerEl => {
+    const step = parseInt(headerEl.getAttribute('data-step'));
+    headerEl.classList.remove('active', 'completed');
+    if (step === stepNum) {
+      headerEl.classList.add('active');
+    } else if (step < stepNum) {
+      headerEl.classList.add('completed');
+    }
+  });
+
+  // Llevar el scroll del modal hacia arriba al cambiar de viñeta
+  const modalOverlay = document.getElementById('signup-modal');
+  if (modalOverlay) {
+    modalOverlay.scrollTop = 0;
+  }
+}
+
+function validateActiveStep(stepNum) {
+  const activeStepEl = document.querySelector(`.signup-step[data-step="${stepNum}"]`);
+  if (!activeStepEl) return true;
+  
+  // Validar inputs visibles obligatorios dentro de la sección actual
+  const inputs = activeStepEl.querySelectorAll('input[required], select[required], textarea[required]');
+  for (let input of inputs) {
+    if (!input.checkValidity()) {
+      input.reportValidity();
+      return false;
+    }
+  }
+  return true;
+}
 
 // 6. Lógica de Modales
 function initModals() {
@@ -412,6 +664,37 @@ function initModals() {
   // Abrir Darse de Alta
   document.getElementById('btn-darse-alta').addEventListener('click', () => {
     signupModal.classList.add('active');
+    
+    // Inicializar listas vacías al abrir el modal y restaurar las vistas
+    signupProfessions = [];
+    signupTherapies = [];
+    signupElements = [];
+    signupDones = [];
+    signupClaris = [];
+    
+    document.querySelector('.signup-steps-container').style.display = 'flex';
+    document.getElementById('signup-form').style.display = 'flex';
+    document.getElementById('signup-form').reset();
+    document.getElementById('signup-modal-title').style.display = 'block';
+    document.getElementById('signup-modal-subtitle').style.display = 'block';
+    document.getElementById('signup-success-view').style.display = 'none';
+
+    // Esconder selects dinámicos del Paso 2
+    document.getElementById('lbl-profession-select').style.display = 'none';
+    document.getElementById('signup-profession-select').style.display = 'none';
+    document.getElementById('signup-profession-input').style.display = 'none';
+    document.getElementById('btn-add-profession').style.display = 'none';
+
+    // Esconder inputs dinámicos de Paso 3
+    document.getElementById('signup-dones-input').style.display = 'none';
+    document.getElementById('btn-add-dones').style.display = 'none';
+    document.getElementById('signup-claris-input').style.display = 'none';
+    document.getElementById('btn-add-claris').style.display = 'none';
+    
+    renderSignupProfessions();
+    renderSignupTherapiesElements();
+    renderSignupDonesClaris();
+    showSignupStep(1);
   });
 
   // Cerrar modales haciendo click fuera de la tarjeta
@@ -421,12 +704,305 @@ function initModals() {
     }
   });
 
-  // Manejo de submits de los formularios
-  document.getElementById('signup-form').addEventListener('submit', (e) => {
+  // Manejo de botones de navegación (Siguiente y Anterior)
+  document.querySelectorAll('.btn-next-step').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nextStep = parseInt(btn.getAttribute('data-next'));
+      const currentStep = nextStep - 1;
+      if (validateActiveStep(currentStep)) {
+        showSignupStep(nextStep);
+      }
+    });
+  });
+
+  document.querySelectorAll('.btn-prev-step').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const prevStep = parseInt(btn.getAttribute('data-prev'));
+      showSignupStep(prevStep);
+    });
+  });
+
+  // Lógica del Combo Categoría y combo Profesión (Paso 2)
+  const categorySelect = document.getElementById('signup-profession-category');
+  const professionSelect = document.getElementById('signup-profession-select');
+  const lblProfessionSelect = document.getElementById('lbl-profession-select');
+  const professionInput = document.getElementById('signup-profession-input');
+  const btnAddProfession = document.getElementById('btn-add-profession');
+
+  if (categorySelect) {
+    categorySelect.addEventListener('change', () => {
+      const category = categorySelect.value;
+      if (!category) {
+        lblProfessionSelect.style.display = 'none';
+        professionSelect.style.display = 'none';
+        professionInput.style.display = 'none';
+        btnAddProfession.style.display = 'none';
+        return;
+      }
+
+      if (category === 'Otra') {
+        lblProfessionSelect.style.display = 'block';
+        lblProfessionSelect.textContent = 'Escribir Profesión';
+        professionSelect.style.display = 'none';
+        professionInput.style.display = 'block';
+        btnAddProfession.style.display = 'block';
+      } else {
+        lblProfessionSelect.style.display = 'block';
+        lblProfessionSelect.textContent = 'Seleccionar Profesión';
+        professionSelect.innerHTML = '<option value="">-- Seleccionar Profesión --</option>';
+        const list = professionsByCategory[category] || [];
+        list.forEach(prof => {
+          const opt = document.createElement('option');
+          opt.value = prof;
+          opt.textContent = prof;
+          professionSelect.appendChild(opt);
+        });
+        professionSelect.style.display = 'block';
+        professionInput.style.display = 'none';
+        btnAddProfession.style.display = 'block';
+      }
+    });
+  }
+
+  // Agregar profesion seleccionada/escrita
+  if (professionSelect) {
+    professionSelect.addEventListener('change', () => {
+      if (professionSelect.value) {
+        addProfession(professionSelect.value);
+        professionSelect.value = '';
+      }
+    });
+  }
+  if (btnAddProfession && professionInput) {
+    btnAddProfession.addEventListener('click', () => {
+      addProfession(professionInput.value);
+      professionInput.value = '';
+    });
+    professionInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addProfession(professionInput.value);
+        professionInput.value = '';
+      }
+    });
+  }
+
+  // Configuración de los botones "Añadir" y select combos (Terapias y Elementos)
+  const therapySelect = document.getElementById('signup-therapy-select');
+  const therapyInput = document.getElementById('signup-therapy-input');
+  const btnAddTherapy = document.getElementById('btn-add-therapy');
+
+  if (therapySelect) {
+    therapySelect.addEventListener('change', () => {
+      if (therapySelect.value) {
+        addTherapy(therapySelect.value);
+        therapySelect.value = '';
+      }
+    });
+  }
+  if (btnAddTherapy && therapyInput) {
+    btnAddTherapy.addEventListener('click', () => {
+      addTherapy(therapyInput.value);
+      therapyInput.value = '';
+    });
+    therapyInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addTherapy(therapyInput.value);
+        therapyInput.value = '';
+      }
+    });
+  }
+
+  const elementSelect = document.getElementById('signup-element-select');
+  const elementInput = document.getElementById('signup-element-input');
+  const btnAddElement = document.getElementById('btn-add-element');
+
+  if (elementSelect) {
+    elementSelect.addEventListener('change', () => {
+      if (elementSelect.value) {
+        addElement(elementSelect.value);
+        elementSelect.value = '';
+      }
+    });
+  }
+  if (btnAddElement && elementInput) {
+    btnAddElement.addEventListener('click', () => {
+      addElement(elementInput.value);
+      elementInput.value = '';
+    });
+    elementInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addElement(elementInput.value);
+        elementInput.value = '';
+      }
+    });
+  }
+
+  // Lógica de Dones y Claris (Paso 3)
+  const donesSelect = document.getElementById('signup-dones-select');
+  const donesInput = document.getElementById('signup-dones-input');
+  const btnAddDones = document.getElementById('btn-add-dones');
+
+  if (donesSelect) {
+    donesSelect.addEventListener('change', () => {
+      const val = donesSelect.value;
+      if (val === 'Otro') {
+        donesInput.style.display = 'block';
+        btnAddDones.style.display = 'block';
+      } else if (val) {
+        addDones(val);
+        donesSelect.value = '';
+        donesInput.style.display = 'none';
+        btnAddDones.style.display = 'none';
+      }
+    });
+  }
+  if (btnAddDones && donesInput) {
+    btnAddDones.addEventListener('click', () => {
+      addDones(donesInput.value);
+      donesInput.value = '';
+      donesSelect.value = '';
+      donesInput.style.display = 'none';
+      btnAddDones.style.display = 'none';
+    });
+    donesInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addDones(donesInput.value);
+        donesInput.value = '';
+        donesSelect.value = '';
+        donesInput.style.display = 'none';
+        btnAddDones.style.display = 'none';
+      }
+    });
+  }
+
+  const clarisSelect = document.getElementById('signup-claris-select');
+  const clarisInput = document.getElementById('signup-claris-input');
+  const btnAddClaris = document.getElementById('btn-add-claris');
+
+  if (clarisSelect) {
+    clarisSelect.addEventListener('change', () => {
+      const val = clarisSelect.value;
+      if (val === 'Otro') {
+        clarisInput.style.display = 'block';
+        btnAddClaris.style.display = 'block';
+      } else if (val) {
+        addClaris(val);
+        clarisSelect.value = '';
+        clarisInput.style.display = 'none';
+        btnAddClaris.style.display = 'none';
+      }
+    });
+  }
+  if (btnAddClaris && clarisInput) {
+    btnAddClaris.addEventListener('click', () => {
+      addClaris(clarisInput.value);
+      clarisInput.value = '';
+      clarisSelect.value = '';
+      clarisInput.style.display = 'none';
+      btnAddClaris.style.display = 'none';
+    });
+    clarisInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addClaris(clarisInput.value);
+        clarisInput.value = '';
+        clarisSelect.value = '';
+        clarisInput.style.display = 'none';
+        btnAddClaris.style.display = 'none';
+      }
+    });
+  }
+
+  // Manejo de submits del formulario de alta (Paso 4)
+  document.getElementById('signup-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    alert('¡Gracias por tu solicitud! Revisaremos tus datos y te añadiremos al mapa de la comunidad a la brevedad.');
-    closeModal(signupModal);
-    e.target.reset();
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalBtnHtml = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Procesando ubicación...';
+
+    const name = document.getElementById('signup-name').value;
+    const lastname = document.getElementById('signup-lastname').value;
+    const birthdate = document.getElementById('signup-birthdate').value;
+    const birthcountry = document.getElementById('signup-birthcountry').value;
+    const city = document.getElementById('signup-city').value;
+    const country = document.getElementById('signup-country').value;
+    const phone = document.getElementById('signup-phone').value;
+    const email = document.getElementById('signup-email').value;
+    const instagram = document.getElementById('signup-instagram').value;
+    const photo = document.getElementById('signup-photo').value || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200&h=200';
+    const about = document.getElementById('signup-about').value;
+
+    // Buscar coordenadas mediante Nominatim API
+    let lat = -15.0; 
+    let lng = -45.0;
+    try {
+      const query = `${city}, ${country}`;
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      if (data && data.length > 0) {
+        lat = parseFloat(data[0].lat);
+        lng = parseFloat(data[0].lon);
+      }
+    } catch (err) {
+      console.error('Error al consultar Nominatim API:', err);
+    }
+
+    // Determinar tipo de miembro:
+    let type = "Miembro Caminante / Consultante";
+    if (signupTherapies.length > 0) {
+      type = "Miembro Facilitador / Terapeuta";
+    } else if (signupProfessions.length > 0) {
+      type = "Miembro Colaborador / Profesional";
+    }
+
+    const dataReport = {
+      name: `${name} ${lastname}`,
+      birthdate,
+      birthcountry,
+      residence: `${city}, ${country}`,
+      phone,
+      email,
+      instagram,
+      photo,
+      coordinates: { lat, lng },
+      type,
+      professions: signupProfessions,
+      therapies: signupTherapies,
+      elements: signupElements,
+      dones: signupDones,
+      claris: signupClaris,
+      about
+    };
+
+    console.log('Solicitud de alta de miembro consolidada:', dataReport);
+
+    // Restaurar estado del botón de envío
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnHtml;
+
+    // Ocultar formulario, título e indicador de pasos
+    document.querySelector('.signup-steps-container').style.display = 'none';
+    document.getElementById('signup-form').style.display = 'none';
+    document.getElementById('signup-modal-title').style.display = 'none';
+    document.getElementById('signup-modal-subtitle').style.display = 'none';
+
+    // Mostrar vista de éxito
+    document.getElementById('signup-success-view').style.display = 'block';
+
+    // Configurar el botón "Cerrar" de la vista de éxito
+    const successCloseBtn = document.getElementById('btn-signup-success-close');
+    const newSuccessCloseBtn = successCloseBtn.cloneNode(true);
+    successCloseBtn.parentNode.replaceChild(newSuccessCloseBtn, successCloseBtn);
+    
+    newSuccessCloseBtn.addEventListener('click', () => {
+      closeModal(signupModal);
+    });
   });
 
   document.getElementById('register-form').addEventListener('submit', (e) => {
@@ -440,7 +1016,6 @@ function initModals() {
 function closeModal(modalElement) {
   modalElement.classList.remove('active');
 }
-
 // Abrir detalle extendido del miembro en modal
 function openDetailModal(memberId) {
   const member = membersData.find(m => m.id === memberId);
