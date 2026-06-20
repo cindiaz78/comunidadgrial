@@ -1,0 +1,11 @@
+{
+  "name": "portal-comunidad-del-grial",
+  "version": "1.0.0",
+  "description": "Portal de la Comunidad del Grial",
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

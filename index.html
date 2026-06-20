@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de la Comunidad del Grial - Conectando profesionales y terapeutas</title>
+  <meta name="description" content="Encuentra terapeutas, profesionales de la salud holística y actividades espirituales de la Comunidad del Grial en todo el mundo.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="main-header" id="main-header">
+    <div class="header-logo-container">
+      <img src="logo.jpg" alt="Logo Comunidad del Grial" class="header-logo" id="header-logo-img">
+      <div class="header-titles">
+        <h1 class="header-title" id="header-title-text">PORTAL DE LA COMUNIDAD DEL GRIAL</h1>
+        <p class="header-subtitle" id="header-subtitle-text">⚜ Comunidad en expansión: el punto de encuentro para reconocernos, habitar la red y compartir nuestros saberes ⚜</p>
+      </div>
+    </div>
+    
+    <div class="header-actions">
+      <div class="stats-pill" id="stats-pill-counter">
+        <i data-lucide="users"></i>
+        <span><strong id="total-members-count">28</strong> miembros en <strong id="total-countries-count">11</strong> países</span>
+      </div>
+      <button class="btn btn-gold btn-darse-alta" id="btn-darse-alta">
+        <i data-lucide="user-plus"></i>
+        <span>Darse de Alta</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN MAP VIEW -->
+  <main class="map-view">
+    <!-- Filters Bar (Overlay on top of map) -->
+    <div class="filters-bar" id="filters-bar-panel">
+      <div class="search-input-wrapper">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" id="search-input" placeholder="Buscar por nombre, apellido o etiqueta...">
+      </div>
+      
+      <div class="dropdowns-wrapper">
+        <div class="custom-select">
+          <select id="filter-type">
+            <option value="">Tipo de Miembro</option>
+            <!-- Dinámicamente poblado -->
+          </select>
+        </div>
+
+        <div class="custom-select">
+          <select id="filter-profession">
+            <option value="">Profesiones</option>
+            <!-- Dinámicamente poblado -->
+          </select>
+        </div>
+        
+        <div class="custom-select">
+          <select id="filter-therapy">
+            <option value="">Terapias</option>
+            <!-- Dinámicamente poblado -->
+          </select>
+        </div>
+      </div>
+      
+      <button class="btn-reset-filters" id="btn-reset-filters" title="Limpiar Filtros">
+        <i data-lucide="trash-2"></i>
+      </button>
+      
+      <div class="results-counter" id="results-counter-display">
+        <span id="filtered-count">28</span> de <span id="total-count-label">28</span>
+      </div>
+    </div>
+
+    <!-- Leaflet Map Container -->
+    <div id="map" class="main-map"></div>
+
+    <!-- Map Legend -->
+    <div class="map-legend" id="map-legend-box">
+      <div class="legend-title">LEYENDA</div>
+      <div class="legend-item">
+        <span class="legend-color legend-color-caminante"></span>
+        <span>Miembro Caminante / Consultante</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color legend-color-colaborador"></span>
+        <span>Miembro Colaborador / Profesional</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color legend-color-facilitador"></span>
+        <span>Miembro Facilitador / Terapeuta</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color legend-color-anfitrion"></span>
+        <span>Anfitrión</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- CALENDAR SECTION -->
+  <section class="calendar-section" id="activities-calendar-section">
+    <div class="calendar-header-container">
+      <div class="calendar-badge" id="calendar-badge-tag">CALENDARIO</div>
+      <h2 class="calendar-title" id="calendar-main-title">Próximas Actividades</h2>
+      <p class="calendar-subtitle">Encuentra talleres, retiros, ceremonias y formaciones en todo el mundo. Conéctate con la comunidad y expande tu camino.</p>
+    </div>
+
+    <div class="calendar-controls">
+      <div class="year-pill" id="active-year-pill">2026</div>
+      <div class="country-filter-wrapper">
+        <label for="filter-activity-country" class="filter-label">Filtrar por país:</label>
+        <div class="custom-select select-dark">
+          <select id="filter-activity-country">
+            <option value="">Todos los países</option>
+            <!-- Dinámicamente poblado -->
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="activities-table-container">
+      <table class="activities-table" id="activities-table">
+        <thead>
+          <tr>
+            <th>FECHA</th>
+            <th>ACTIVIDAD</th>
+            <th>PAÍS</th>
+            <th>CIUDAD</th>
+            <th>MODALIDAD</th>
+            <th>ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody id="activities-table-body">
+          <!-- Dinámicamente renderizado -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="main-footer" id="main-footer">
+    <div class="footer-content">
+      <img src="logo.jpg" alt="Logo Grial" class="footer-logo">
+      <p class="footer-text">© 2026 Portal de la Comunidad del Grial. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL: VER DETALLE COMPLETO -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="detail-modal-close">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="modal-header">
+        <div class="modal-avatar-container">
+          <img src="" alt="" id="modal-member-photo" class="modal-avatar">
+        </div>
+        <div class="modal-header-info">
+          <h3 id="modal-member-name">Nombre</h3>
+          <p class="modal-member-location"><i data-lucide="map-pin"></i> <span id="modal-member-location-text">Ciudad, País</span></p>
+          <p class="modal-member-profession"><i data-lucide="briefcase"></i> <span id="modal-member-profession-text">Profesión</span></p>
+          <div class="modal-badge-wrapper">
+            <span class="member-type-badge badge-terapeuta" id="modal-member-type-badge">Terapeuta</span>
+            <span class="modal-verified-seal" id="modal-member-verified">
+              <i data-lucide="shield-check"></i> ✓ Miembro Verificado
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-section">
+          <h4><i data-lucide="sparkles"></i> Terapias y Especialidades</h4>
+          <div class="tags-container" id="modal-therapies-tags">
+            <!-- Tags de terapias -->
+          </div>
+          <div class="modal-sessions-counter" id="modal-member-sessions">
+            <!-- Dinámicamente poblado: 🌀 X Sesiones brindadas -->
+          </div>
+        </div>
+        
+        <div class="modal-info-grid">
+          <div class="modal-info-section">
+            <h4><i data-lucide="cpu"></i> Aparatología disponible</h4>
+            <div class="tags-container" id="modal-aparatologia-tags">
+              <!-- Tags de aparatología -->
+            </div>
+          </div>
+          
+          <div class="modal-info-section">
+            <h4><i data-lucide="gem"></i> Elementos sagrados</h4>
+            <div class="tags-container" id="modal-elementos-tags">
+              <!-- Tags de elementos -->
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-info-section modal-jornadas-section">
+          <h4><i data-lucide="calendar"></i> Asistencia a Jornadas</h4>
+          <div class="jornada-badge" id="modal-member-jornada">
+            <!-- Dinámicamente poblado: 📅 Participó en Jornada X -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="" target="_blank" class="btn btn-whatsapp" id="modal-whatsapp-btn">
+          <i data-lucide="message-circle"></i> Contactar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DARSE DE ALTA (FORMULARIO) -->
+  <div class="modal-overlay" id="signup-modal">
+    <div class="modal-card modal-card-large">
+      <button class="modal-close-btn" id="signup-modal-close">
+        <i data-lucide="x"></i>
+      </button>
+      <h3>Formulario de Alta - Comunidad del Grial</h3>
+      <p class="signup-intro">Completá tu ficha para contarnos quién sos, qué te apasiona y qué saberes tenés para compartir con la Comunidad.</p>
+      
+      <form id="signup-form" class="signup-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="signup-name">Nombre y Apellido *</label>
+            <input type="text" id="signup-name" required placeholder="Ej. Martín Paz">
+          </div>
+          <div class="form-group">
+            <label for="signup-type">Tipo de Miembro *</label>
+            <select id="signup-type" required>
+              <option value="Terapeuta">Terapeuta</option>
+              <option value="Profesional">Profesional</option>
+              <option value="Mixto">Mixto (Ambos)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="signup-profession">Profesión / Título Principal *</label>
+            <input type="text" id="signup-profession" required placeholder="Ej. Guía Espiritual">
+          </div>
+          <div class="form-group">
+            <label for="signup-phone">Teléfono de Contacto (WhatsApp) *</label>
+            <input type="tel" id="signup-phone" required placeholder="Ej. 5491134567890">
+          </div>
+          <div class="form-group">
+            <label for="signup-country">País *</label>
+            <input type="text" id="signup-country" required placeholder="Ej. Perú">
+          </div>
+          <div class="form-group">
+            <label for="signup-city">Ciudad *</label>
+            <input type="text" id="signup-city" required placeholder="Ej. Cusco">
+          </div>
+          <div class="form-group">
+            <label for="signup-lat">Latitud (para el mapa) *</label>
+            <input type="number" step="any" id="signup-lat" required placeholder="Ej. -13.5226">
+          </div>
+          <div class="form-group">
+            <label for="signup-lng">Longitud (para el mapa) *</label>
+            <input type="number" step="any" id="signup-lng" required placeholder="Ej. -71.9673">
+          </div>
+        </div>
+        
+        <div class="form-group full-width">
+          <label for="signup-therapies">Terapias y Especialidades (separadas por comas) *</label>
+          <input type="text" id="signup-therapies" required placeholder="Ej. Sanación Energética, Reiki, Música Medicina">
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="signup-aparatologia">Aparatología (separada por comas)</label>
+            <input type="text" id="signup-aparatologia" placeholder="Ej. Generador de Orgón, Camilla Ceragem">
+          </div>
+          <div class="form-group">
+            <label for="signup-elementos">Elementos Sagrados (separados por comas)</label>
+            <input type="text" id="signup-elementos" placeholder="Ej. Cuencos de Cuarzo, Gemas, Sahumerios">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-photo">URL de Foto de Perfil (Opcional)</label>
+          <input type="url" id="signup-photo" placeholder="https://ejemplo.com/tu-foto.jpg">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="signup-cancel-btn">Cancelar</button>
+          <button type="submit" class="btn btn-gold">Enviar Solicitud</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: INSCRIPCIÓN A ACTIVIDAD -->
+  <div class="modal-overlay" id="register-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="register-modal-close">
+        <i data-lucide="x"></i>
+      </button>
+      <h3 id="register-activity-title">Inscripción a Actividad</h3>
+      <p class="register-intro">Completa el formulario para reservar tu lugar. El organizador se pondrá en contacto contigo.</p>
+      
+      <form id="register-form" class="signup-form">
+        <div class="form-group">
+          <label for="register-name">Nombre Completo *</label>
+          <input type="text" id="register-name" required placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label for="register-email">Email *</label>
+          <input type="email" id="register-email" required placeholder="tu@email.com">
+        </div>
+        <div class="form-group">
+          <label for="register-phone">WhatsApp *</label>
+          <input type="tel" id="register-phone" required placeholder="Tu teléfono">
+        </div>
+        <div class="form-group">
+          <label for="register-message">Mensaje Adicional</label>
+          <textarea id="register-message" placeholder="¿Tienes alguna consulta especial?"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-gold full-width">Confirmar Inscripción</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- App JS module -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
