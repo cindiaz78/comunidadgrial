@@ -18,7 +18,8 @@ export const membersData = [
     phone: "51987654321",
     verified: true,
     sessionsBrindadas: 24,
-    jornada: { title: "Jornada de Cosmología Ancestral", date: "10 de Mayo, 2026" }
+    jornada: { title: "Jornada de Cosmología Ancestral", date: "10 de Mayo, 2026" },
+    instagram: "martin.paz.grial"
   },
   {
     id: 2,
@@ -38,7 +39,8 @@ export const membersData = [
     phone: "5491134567890",
     verified: true,
     sessionsBrindadas: 18,
-    jornada: { title: "Jornada de Constelaciones del Sur", date: "22 de Abril, 2026" }
+    jornada: { title: "Jornada de Constelaciones del Sur", date: "22 de Abril, 2026" },
+    instagram: "elena.rossi.psi"
   },
   {
     id: 3,
@@ -58,7 +60,8 @@ export const membersData = [
     phone: "5493512345678",
     verified: true,
     sessionsBrindadas: 30,
-    jornada: { title: "Encuentro de Medicina Integrativa", date: "15 de Mayo, 2026" }
+    jornada: { title: "Encuentro de Medicina Integrativa", date: "15 de Mayo, 2026" },
+    instagram: "dr.sebastian.ortega"
   },
   {
     id: 4,
@@ -78,7 +81,8 @@ export const membersData = [
     phone: "59899123456",
     verified: true,
     sessionsBrindadas: 15,
-    jornada: { title: "Jornada de Armonización de Otoño", date: "02 de Mayo, 2026" }
+    jornada: { title: "Jornada de Armonización de Otoño", date: "02 de Mayo, 2026" },
+    instagram: "gabriela.holistica"
   },
   {
     id: 5,
@@ -98,7 +102,8 @@ export const membersData = [
     phone: "56987654321",
     verified: true,
     sessionsBrindadas: 22,
-    jornada: { title: "Jornada Chilena de Terapias Manuales", date: "28 de Marzo, 2026" }
+    jornada: { title: "Jornada Chilena de Terapias Manuales", date: "28 de Marzo, 2026" },
+    instagram: "clara.dominguez.kine"
   },
   {
     id: 6,
@@ -118,7 +123,8 @@ export const membersData = [
     phone: "59176543210",
     verified: true,
     sessionsBrindadas: 9,
-    jornada: { title: "Encuentro de Sabiduría Ancestral", date: "12 de Abril, 2026" }
+    jornada: { title: "Encuentro de Sabiduría Ancestral", date: "12 de Abril, 2026" },
+    instagram: "mateo.chaman"
   },
   {
     id: 7,
@@ -138,7 +144,8 @@ export const membersData = [
     phone: "5492612345678",
     verified: true,
     sessionsBrindadas: 16,
-    jornada: { title: "Jornada de Canto y Sonido Sagrado", date: "18 de Mayo, 2026" }
+    jornada: { title: "Jornada de Canto y Sonido Sagrado", date: "18 de Mayo, 2026" },
+    instagram: "laura.sonidos"
   },
   {
     id: 8,
@@ -158,7 +165,8 @@ export const membersData = [
     phone: "573001234567",
     verified: true,
     sessionsBrindadas: 12,
-    jornada: { title: "Encuentro de Psicología y Espiritualidad", date: "05 de Mayo, 2026" }
+    jornada: { title: "Encuentro de Psicología y Espiritualidad", date: "05 de Mayo, 2026" },
+    instagram: "juandiego.transpersonal"
   },
   {
     id: 9,
@@ -178,7 +186,8 @@ export const membersData = [
     phone: "34612345678",
     verified: true,
     sessionsBrindadas: 28,
-    jornada: { title: "Jornada Europea de Acupuntura Integrativa", date: "10 de Abril, 2026" }
+    jornada: { title: "Jornada Europea de Acupuntura Integrativa", date: "10 de Abril, 2026" },
+    instagram: "dra.patricia.flores"
   },
   {
     id: 10,
@@ -198,7 +207,8 @@ export const membersData = [
     phone: "34687654321",
     verified: true,
     sessionsBrindadas: 14,
-    jornada: { title: "Jornada de Sanación Cuántica", date: "12 de Mayo, 2026" }
+    jornada: { title: "Jornada de Sanación Cuántica", date: "12 de Mayo, 2026" },
+    instagram: "alejandro.sanz.reiki"
   },
   {
     id: 11,
@@ -218,7 +228,8 @@ export const membersData = [
     phone: "595981234567",
     verified: true,
     sessionsBrindadas: 11,
-    jornada: { title: "Taller de Alimentación Consciente", date: "25 de Abril, 2026" }
+    jornada: { title: "Taller de Alimentación Consciente", date: "25 de Abril, 2026" },
+    instagram: "camila.nutricion"
   },
   {
     id: 12,
@@ -238,7 +249,8 @@ export const membersData = [
     phone: "5492944123456",
     verified: true,
     sessionsBrindadas: 26,
-    jornada: { title: "Jornada de Chamanismo de la Patagonia", date: "08 de Marzo, 2026" }
+    jornada: { title: "Jornada de Chamanismo de la Patagonia", date: "08 de Marzo, 2026" },
+    instagram: "ricardo.peralta"
   },
   {
     id: 13,
@@ -258,7 +270,8 @@ export const membersData = [
     phone: "51976543210",
     verified: true,
     sessionsBrindadas: 19,
-    jornada: { title: "Jornada de Vibración y Frecuencias", date: "14 de Mayo, 2026" }
+    jornada: { title: "Jornada de Vibración y Frecuencias", date: "14 de Mayo, 2026" },
+    instagram: "sofia.sonidos"
   },
   {
     id: 14,
@@ -278,7 +291,8 @@ export const membersData = [
     phone: "56912345678",
     verified: true,
     sessionsBrindadas: 15,
-    jornada: { title: "Seminario de Medicina Tradicional India", date: "30 de Abril, 2026" }
+    jornada: { title: "Seminario de Medicina Tradicional India", date: "30 de Abril, 2026" },
+    instagram: "nicolas.ayurveda"
   },
   {
     id: 15,
@@ -298,7 +312,8 @@ export const membersData = [
     phone: "593981234567",
     verified: true,
     sessionsBrindadas: 25,
-    jornada: { title: "Encuentro Andino de Constelaciones", date: "16 de Mayo, 2026" }
+    jornada: { title: "Encuentro Andino de Constelaciones", date: "16 de Mayo, 2026" },
+    instagram: "anamaria.guia"
   },
   {
     id: 16,
@@ -318,7 +333,8 @@ export const membersData = [
     phone: "59899765432",
     verified: true,
     sessionsBrindadas: 13,
-    jornada: { title: "Jornada de Magnetoterapia y Salud", date: "20 de Abril, 2026" }
+    jornada: { title: "Jornada de Magnetoterapia y Salud", date: "20 de Abril, 2026" },
+    instagram: "lucas.biomagnetismo"
   },
   {
     id: 17,
@@ -338,7 +354,8 @@ export const membersData = [
     phone: "34699999999",
     verified: true,
     sessionsBrindadas: 21,
-    jornada: { title: "Encuentro Andaluz de Gestalt", date: "09 de Mayo, 2026" }
+    jornada: { title: "Encuentro Andaluz de Gestalt", date: "09 de Mayo, 2026" },
+    instagram: "isabel.gestalt"
   },
   {
     id: 18,
@@ -358,7 +375,8 @@ export const membersData = [
     phone: "5493412345678",
     verified: true,
     sessionsBrindadas: 27,
-    jornada: { title: "Jornada de Kinesiología Holística", date: "11 de Abril, 2026" }
+    jornada: { title: "Jornada de Kinesiología Holística", date: "11 de Abril, 2026" },
+    instagram: "ignacio.homeopatia"
   },
   {
     id: 19,
@@ -378,7 +396,8 @@ export const membersData = [
     phone: "59178912345",
     verified: true,
     sessionsBrindadas: 14,
-    jornada: { title: "Jornada de Sahumos y Limpiezas", date: "24 de Abril, 2026" }
+    jornada: { title: "Jornada de Sahumos y Limpiezas", date: "24 de Abril, 2026" },
+    instagram: "mariela.sahumos"
   },
   {
     id: 20,
@@ -398,7 +417,8 @@ export const membersData = [
     phone: "5493871234567",
     verified: true,
     sessionsBrindadas: 17,
-    jornada: { title: "Taller del Alma y Linaje", date: "06 de Mayo, 2026" }
+    jornada: { title: "Taller del Alma y Linaje", date: "06 de Mayo, 2026" },
+    instagram: "diego.psicologo"
   },
   {
     id: 21,
@@ -418,7 +438,8 @@ export const membersData = [
     phone: "5492231234567",
     verified: true,
     sessionsBrindadas: 23,
-    jornada: { title: "Jornada de Lecturas Akáshicas del Mar", date: "15 de Mayo, 2026" }
+    jornada: { title: "Jornada de Lecturas Akáshicas del Mar", date: "15 de Mayo, 2026" },
+    instagram: "valeria.registros"
   },
   {
     id: 22,
@@ -438,7 +459,8 @@ export const membersData = [
     phone: "34666666666",
     verified: true,
     sessionsBrindadas: 25,
-    jornada: { title: "Jornada Levantina de Sonoterapia", date: "22 de Abril, 2026" }
+    jornada: { title: "Jornada Levantina de Sonoterapia", date: "22 de Abril, 2026" },
+    instagram: "bruno.sonoterapia"
   },
   {
     id: 23,
@@ -458,7 +480,8 @@ export const membersData = [
     phone: "50688888888",
     verified: true,
     sessionsBrindadas: 8,
-    jornada: { title: "Jornada de Crianza Respetuosa", date: "12 de Abril, 2026" }
+    jornada: { title: "Jornada de Crianza Respetuosa", date: "12 de Abril, 2026" },
+    instagram: "carmen.lyra"
   },
   {
     id: 24,
@@ -478,7 +501,8 @@ export const membersData = [
     phone: "34655555555",
     verified: true,
     sessionsBrindadas: 10,
-    jornada: { title: "Jornada de Expresión y Arteterapia", date: "28 de Abril, 2026" }
+    jornada: { title: "Jornada de Expresión y Arteterapia", date: "28 de Abril, 2026" },
+    instagram: "sabina.poesia"
   },
   {
     id: 25,
@@ -498,7 +522,8 @@ export const membersData = [
     phone: "56999998888",
     verified: true,
     sessionsBrindadas: 11,
-    jornada: { title: "Encuentro de Terapias del Biobío", date: "02 de Mayo, 2026" }
+    jornada: { title: "Encuentro de Terapias del Biobío", date: "02 de Mayo, 2026" },
+    instagram: "fran.corporal"
   },
   {
     id: 26,
@@ -518,7 +543,8 @@ export const membersData = [
     phone: "573109876543",
     verified: true,
     sessionsBrindadas: 23,
-    jornada: { title: "Jornada Andina de Medicinas Alternativas", date: "15 de Mayo, 2026" }
+    jornada: { title: "Jornada Andina de Medicinas Alternativas", date: "15 de Mayo, 2026" },
+    instagram: "augusto.medicina"
   },
   {
     id: 27,
@@ -538,7 +564,8 @@ export const membersData = [
     phone: "525512345678",
     verified: true,
     sessionsBrindadas: 14,
-    jornada: { title: "Encuentro de Medicina Tradicional Mexicana", date: "24 de Abril, 2026" }
+    jornada: { title: "Encuentro de Medicina Tradicional Mexicana", date: "24 de Abril, 2026" },
+    instagram: "lucia.herbolaria"
   },
   {
     id: 28,
@@ -558,7 +585,8 @@ export const membersData = [
     phone: "523398765432",
     verified: true,
     sessionsBrindadas: 16,
-    jornada: { title: "Jornada de Arte y Sanación", date: "15 de Mayo, 2026" }
+    jornada: { title: "Jornada de Arte y Sanación", date: "15 de Mayo, 2026" },
+    instagram: "guillermo.creativo"
   }
 ];
 

@@ -206,6 +206,11 @@ function renderMembers() {
           <button class="card-btn-detail" data-id="${member.id}">
             <i data-lucide="user"></i> Ver más detalle
           </button>
+          ${member.instagram ? `
+          <a href="https://instagram.com/${member.instagram}" target="_blank" class="card-btn-instagram" title="Instagram">
+            <i data-lucide="instagram"></i>
+          </a>
+          ` : ''}
           <a href="https://wa.me/${member.phone}?text=Hola%20${encodeURIComponent(member.name)},%20te%20contacto%20desde%20el%20Portal%20Comunidad%20del%20Grial." target="_blank" class="card-btn-whatsapp" title="WhatsApp">
             <i data-lucide="message-circle"></i>
           </a>
@@ -497,9 +502,17 @@ function openDetailModal(memberId) {
     jornadaContainer.innerHTML = `<span style="color: var(--text-gray);">Sin registros de asistencia a jornadas recientes.</span>`;
   }
 
-  // Enlace WhatsApp
+  // Enlace WhatsApp e Instagram
   const waBtn = document.getElementById('modal-whatsapp-btn');
   waBtn.href = `https://wa.me/${member.phone}?text=Hola%20${encodeURIComponent(member.name)},%20te%20contacto%20desde%20el%20Portal%20Comunidad%20del%20Grial.`;
+
+  const igBtn = document.getElementById('modal-instagram-btn');
+  if (member.instagram) {
+    igBtn.style.display = 'inline-flex';
+    igBtn.href = `https://instagram.com/${member.instagram}`;
+  } else {
+    igBtn.style.display = 'none';
+  }
 
   // Activar modal e iconos
   detailModal.classList.add('active');
